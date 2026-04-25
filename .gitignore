@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv
+env/
+venv/
+ENV/
+*.log
+.vscode/
+.idea/
+*.original.md
+verify_tensor.py
+test_sleep.py
+test_motor.py
