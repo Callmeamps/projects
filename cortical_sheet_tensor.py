@@ -156,7 +156,10 @@ class TensorizedCorticalSheet:
 
         noise = np.random.default_rng(self.t * 100).normal(0, 0.05, (self.n_cols, cfg.d_in))
         x_bottom_all = x_bottom[None, :] + noise
-        x_top_all = np.tile(x_top if x_top is not None else np.zeros(cfg.d_ctx), (self.n_cols, 1))
+        if x_top is not None and x_top.ndim == 2:
+            x_top_all = x_top
+        else:
+            x_top_all = np.tile(x_top if x_top is not None else np.zeros(cfg.d_ctx), (self.n_cols, 1))
 
         W_b_eff, W_a_eff = self.W_basal + self.W_basal_stable, self.W_apical + self.W_apical_stable
         basal = np.einsum('cdi,ci->cd', W_b_eff, x_bottom_all)

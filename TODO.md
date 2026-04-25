@@ -24,10 +24,21 @@
 - [x] **8.3 Task Benchmark**
     - [x] Verify learning on 1D Navigation task (SUCCESS: 36 steps).
 
-## Phase 9: Multi-Area Hierarchy (Future)
-- [ ] Connect multiple CorticalSheets via Apical/Basal streams.
-- [ ] Long-range feedback (L6 -> Thalamus).
-- [ ] Large-scale behavioral tasks.
+## Phase 9: Multi-Area Hierarchy
+- [x] **9.1 Inter-area Communication**
+    - [x] Create `CortexHierarchy` manager.
+    - [x] Link V1 (Sensory) -> V2 (Abstract) via FF/FB tensors.
+- [x] **9.2 Predictive Feedback (L6 -> Thalamus)**
+    - [x] Implement Top-down prediction of lower-area activity.
+- [x] **9.3 Temporal Pooling**
+    - [x] Implement slower timescales for higher-level areas.
+- [x] **9.4 Hierarchical Task**
+    - [x] Verify on hierarchical pattern sequence (V2 10x more stable).
+
+## Future: Phase 10: Evolutionary Scaling (Refinement)
+- [ ] Implement Genetic Algorithm for `ColumnConfig` optimization.
+- [ ] Large-scale sheet (1000+ columns) on GPU.
+- [ ] Integration with PyTorch/JAX for acceleration.
 
 ---
 *Review Ref (2024-04-25): Phase 7 & 8 complete. System is now a vectorized, scalable, sensorimotor cortical sheet capable of local learning and memory consolidation.*
