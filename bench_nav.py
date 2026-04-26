@@ -26,7 +26,7 @@ def run_nav():
     env = NavEnv()
     
     total_reward = 0
-    for i in range(100):
+    for i in range(500):
         obs, reward, done = env.step(sheet.step(obs if 'obs' in locals() else np.array([0.0, 1.0]), reward=reward if 'reward' in locals() else 0.0)["action"])
         total_reward += reward
         if i % 10 == 0:
