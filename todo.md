@@ -29,8 +29,10 @@
 
 ## Phase 11: Next Steps ⏳
 - [ ] JAX port (if needed for GPU acceleration)
-- [ ] Full GA run (20 gen, 20 pop)
+- [x] Full GA run (20 gen, 20 pop)
+  - Best fitness: 51.369, d_h=47, lr_base=0.001
 - [x] Apply best config to navigation task
+  - Full config: d_h=105, lr_base=0.001, tau_elig=98, anti_hebb_scale=0.0155, target_firing_rate=0.01
 - [ ] Multi-environment testing (chat, game, tool use)
 - [ ] Swarm specialization experiments
 - [ ] Documentation update (API spec v2.0)
