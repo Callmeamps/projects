@@ -2,6 +2,13 @@
 
 This file provides instructions and context for AI coding agents working on this project.
 
+## 🛠 Shell Environment & Path Issues (CRITICAL)
+
+Pi agents run in a **non-interactive shell** which bypasses `~/.zshrc`. This causes `command not found` for `bd`, `npm`, `nvm`, and other tools.
+
+**FIX**: Prepend `zsh -c "source ~/.zshrc && ..."` to commands requiring these tools.
+**Example**: `zsh -c "source ~/.zshrc && bd ready"`
+
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:ca08a54f -->
 ## Beads Issue Tracker
 

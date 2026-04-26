@@ -1,5 +1,12 @@
 # Agent Instructions
 
+## 🛠 Shell Environment & Path Issues (CRITICAL)
+
+Pi agents run in a **non-interactive shell** which bypasses `~/.zshrc`. This causes `command not found` for `bd`, `npm`, `nvm`, and other tools.
+
+**FIX**: Prepend `zsh -c "source ~/.zshrc && ..."` to commands requiring these tools.
+**Example**: `zsh -c "source ~/.zshrc && bd ready"`
+
 This project uses **bd** (beads) for issue tracking. Run `bd prime` for full workflow context.
 
 ## Quick Reference

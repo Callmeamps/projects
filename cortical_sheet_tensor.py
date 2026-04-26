@@ -22,6 +22,7 @@ from cortical_column import (
     ColumnConfig, NeuromodState, InhibitorySystem,
     _sigmoid, _tanh,
 )
+from engram_memory import EngramMemory
 
 class TensorizedCorticalSheet:
     def __init__(self, n_cols: int = 100,
@@ -51,6 +52,9 @@ class TensorizedCorticalSheet:
         # ── 8.1 Motor Layer ──
         self.d_action = 4
         self.W_motor  = rng.normal(0, 0.1, (n_cols, self.d_action, self.cfg.d_h))
+
+        # ── Engram Memory (v1.0 Section 7.2) ──
+        self.memory = EngramMemory(d_key=self.cfg.d_h, d_val=self.cfg.d_ctx, max_size=2000)
 
         self.W_basal_stable  = np.zeros_like(self.W_basal)
         self.W_apical_stable = np.zeros_like(self.W_apical)
@@ -162,8 +166,17 @@ class TensorizedCorticalSheet:
             x_top_all = np.tile(x_top if x_top is not None else np.zeros(cfg.d_ctx), (self.n_cols, 1))
 
         W_b_eff, W_a_eff = self.W_basal + self.W_basal_stable, self.W_apical + self.W_apical_stable
+
+        # ── Memory Retrieval (Section 7.2) ──
+        h_avg = np.mean(self.h, axis=0)
+        mem_ctx, mem_conf = self.memory.retrieve(h_avg)
+
         basal = np.einsum('cdi,ci->cd', W_b_eff, x_bottom_all)
         x_top_aug = x_top_all + 0.3 * np.einsum('cdh,ch->cd', self.W_h_to_ctx, self.h)
+        
+        # Integrate memory context into apical drive
+        x_top_aug += 0.4 * mem_conf * mem_ctx[None, :]
+
         apical_gate = _sigmoid(np.einsum('cdi,ci->cd', W_a_eff, x_top_aug) * (1.0 - self.sst_sup[:, None]))
         
         soma = basal * apical_gate
@@ -206,6 +219,12 @@ class TensorizedCorticalSheet:
 
         if learn: self._update_long_range()
         if neuromod_override is None: self._update_neuromod(err_mag, reward)
+
+        # ── Memory update (store trace, Section 7.2) ──
+        if learn and nm.da > 1.2:  # High DA reinforces memory
+            h_active_avg = np.mean(self.h[self.active_mask], axis=0) if np.any(self.active_mask) else h_avg
+            self.memory.store(h_active_avg, np.mean(x_top_aug, axis=0), strength=nm.da)
+        self.memory.decay()
 
         # ── 8.1 Motor Generation ──
         proposals = np.einsum('cah,ch->ca', self.W_motor, self.h)
