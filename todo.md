@@ -38,7 +38,7 @@
   - [x] Game: 2D grid environment (bench_game.py)
   - [x] Chat: Stub created (bench_chat.py)
   - [x] Tool use: Stub created (bench_tool.py)
-- [ ] Swarm specialization experiments
+- [~] Swarm specialization experiments (in progress)
 - [x] Documentation update (API spec v2.0)
   - Created API_SPEC_V2.md
 
