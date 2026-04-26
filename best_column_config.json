@@ -1,0 +1,11 @@
+{
+  "d_in": 2,
+  "d_h": 47,
+  "d_ctx": 8,
+  "d_lat": 8,
+  "k_neighbors": 2,
+  "lr_base": 0.001,
+  "tau_elig": 10,
+  "anti_hebb_scale": 0.007769200573356441,
+  "target_firing_rate": 0.01
+}

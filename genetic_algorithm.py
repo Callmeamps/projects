@@ -193,7 +193,7 @@ def run_evolution(generations: int = 20, pop_size: int = 20,
 
 if __name__ == "__main__":
     print("Starting Genetic Algorithm for ColumnConfig Optimization...")
-    best = run_evolution(generations=10, pop_size=15, elite_size=2)
+    best = run_evolution(generations=20, pop_size=20, elite_size=2)
 
     # Save best config
     import json
