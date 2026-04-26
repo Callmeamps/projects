@@ -34,7 +34,10 @@
   - Best fitness: 51.369, d_h=47, lr_base=0.001
 - [x] Apply best config to navigation task
   - Full config: d_h=105, lr_base=0.001, tau_elig=98, anti_hebb_scale=0.0155, target_firing_rate=0.01
-- [ ] Multi-environment testing (chat, game, tool use)
+- [~] Multi-environment testing (chat, game, tool use)
+  - [x] Game: 2D grid environment (bench_game.py)
+  - [ ] Chat: TBD
+  - [ ] Tool use: TBD
 - [ ] Swarm specialization experiments
 - [ ] Documentation update (API spec v2.0)
 
