@@ -115,4 +115,7 @@ def run_exp_a(steps=1000, output_csv=None):
 
 
 if __name__ == "__main__":
-    run_exp_a(steps=500, output_csv="exp_a_results.csv")
+    import sys
+    steps = int(sys.argv[1]) if len(sys.argv) > 1 else 1000
+    output = sys.argv[2] if len(sys.argv) > 2 else "exp_a_results.csv"
+    run_exp_a(steps=steps, output_csv=output)
