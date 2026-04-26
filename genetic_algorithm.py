@@ -83,15 +83,14 @@ def evaluate_fitness(cfg: ColumnConfig) -> float:
 
     # Task 2: Memory (weight: 0.3)
     try:
-        from bench_memory import run_memory_benchmark
-        # Simplified memory test
+        from cortical_column import NeuromodState
         sheet = TensorizedCorticalSheet(n_cols=30, cfg=cfg)
         rng = np.random.default_rng(42)
         pattern = rng.normal(0, 1, cfg.d_in)
         errors = []
 
+        nm = NeuromodState(da=1.5, ach=1.2)
         for i in range(50):
-            nm = type('NM', (), {'da': 1.5, 'ach': 1.2, 'exploration_mode': lambda s: False})()
             out = sheet.step(pattern, neuromod_override=nm)
             errors.append(out["mean_e_mag"])
 
@@ -165,7 +164,7 @@ def run_evolution(generations: int = 20, pop_size: int = 20,
         while len(new_population) < pop_size:
             parent1 = tournament_select(population)
             parent2 = tournament_select(population)
-            child1, child2 = crossover(parent1, child2=parent2)
+            child1, child2 = crossover(parent1, parent2)
 
             child1 = mutate(child1)
             child2 = mutate(child2)
