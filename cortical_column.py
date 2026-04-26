@@ -24,6 +24,7 @@ class ColumnConfig:
     d_ctx: int = 16       # x_top dimensionality
     d_lat: int = 16       # x_lateral dimensionality (per neighbor)
     d_h: int = 32         # recurrent state size
+    d_action: int = 4     # action output dimension
     k_neighbors: int = 4  # lateral connections
 
     # Inhibitory clips (Phase 0.8)

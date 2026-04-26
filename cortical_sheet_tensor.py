@@ -50,7 +50,7 @@ class TensorizedCorticalSheet:
         self.W_lateral   = rng.normal(0, scale_l, (n_cols, self.cfg.d_lat, self.cfg.d_h))
 
         # ── 8.1 Motor Layer ──
-        self.d_action = 4
+        self.d_action = self.cfg.d_action
         self.W_motor  = rng.normal(0, 0.1, (n_cols, self.d_action, self.cfg.d_h))
 
         # ── Engram Memory (v1.0 Section 7.2) ──

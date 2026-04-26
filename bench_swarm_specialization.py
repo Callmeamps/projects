@@ -46,6 +46,8 @@ class MultiTaskEnv:
     """
     Multi-task environment that switches between nav, game, and memory tasks.
     Observation: concat(task_one_hot, task_observation)
+    Action: expects a unified vector of size 8.
+            First 2 dims used for nav, first 4 for game, all 8 for memory.
     """
     def __init__(self, task_switch_interval=100):
         self.task_switch_interval = task_switch_interval
@@ -71,9 +73,11 @@ class MultiTaskEnv:
         self.current_task = np.random.choice(TASKS)
         self._reset_current()
         return self._get_obs()
-        return self._get_obs()
 
     def step(self, action):
+        """
+        action: unified vector of size 8.
+        """
         self.steps += 1
         # Switch task if interval reached
         if self.steps % self.task_switch_interval == 0:
@@ -81,12 +85,20 @@ class MultiTaskEnv:
             self._reset_current()
 
         env = self.envs[self.current_task]
+        # Slice action according to task
         if self.current_task == 'nav':
-            obs, reward, done = env.step(action)
+            task_action = action[:2]
         elif self.current_task == 'game':
-            obs, reward, done = env.step(action)
+            task_action = action[:4]
         else:  # memory
-            obs, reward, done = env.step(action)
+            task_action = action[:8]
+
+        if self.current_task == 'nav':
+            obs, reward, done = env.step(task_action)
+        elif self.current_task == 'game':
+            obs, reward, done = env.step(task_action)
+        else:  # memory
+            obs, reward, done = env.step(task_action)
 
         return self._augment_obs(obs), reward, done
 
@@ -113,7 +125,9 @@ if __name__ == "__main__":
     # Quick sanity check
     env = MultiTaskEnv(task_switch_interval=50)
     print("Initial task:", env.current_task)
-    obs, reward, done = env.step(np.array([0.0, 0.0]))
+    # Use unified action vector of size 8
+    dummy_action = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+    obs, reward, done = env.step(dummy_action)
     print("Obs shape:", obs.shape)
     print("Task one-hot:", obs[:3])
     print("Success: MultiTaskEnv ready.")
