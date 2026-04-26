@@ -36,8 +36,12 @@
     - [x] Verify on hierarchical pattern sequence (V2 10x more stable).
 
 ## Future: Phase 10: Evolutionary Scaling (Refinement)
-- [ ] Implement Genetic Algorithm for `ColumnConfig` optimization.
+- [x] Implement Genetic Algorithm for `ColumnConfig` optimization.  
+  - Created `genetic_algorithm.py` (tests navigation + memory fitness)
 - [ ] Large-scale sheet (1000+ columns) on GPU.
+  - PyTorch/JAX not installed - pending `pip install torch` or `pip install jax`
+  - Created `cortical_sheet_pytorch.py` (requires PyTorch)
+  - Created `bench_scale.py` for scaling benchmarks
 - [ ] Integration with PyTorch/JAX for acceleration.
 
 ---
