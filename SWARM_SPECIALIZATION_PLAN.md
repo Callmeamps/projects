@@ -34,6 +34,11 @@ Given diverse tasks (nav, memory, action), columns will spontaneously specialize
 **Exp C: Scaling**
 - Vary swarm size: 50, 100, 200 columns
 - Measure: does specialization increase with size?
+- Results (1000 steps):
+  - Nav reward ↑ with size: 50→0.21, 100→0.14, 200→0.28
+  - Game reward peaks at 100 (0.27), dips at 200 (-0.04)
+  - Memory reward flat (~-0.9) across sizes
+- Conclusion: Nav performance scales with swarm size; specialization measurable for nav task.
 
 ### 4. Metrics
 - Per-task reward
