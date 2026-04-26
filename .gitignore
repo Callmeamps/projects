@@ -13,3 +13,8 @@ ENV/
 verify_tensor.py
 test_sleep.py
 test_motor.py
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
