@@ -11,6 +11,7 @@ A scalable, hierarchical implementation of the canonical cortical microcircuit.
 - **Sensorimotor**: Integrated motor output layer (L5b) with reward-modulated (Dopamine) learning.
 - **Structural Plasticity**: Dynamic pruning and regrowing of sparse lateral connections.
 - **Memory Consolidation**: Generative sleep/replay cycles to stabilize synaptic knowledge.
+- **Engram Memory Layer**: Fast associative memory using Modern Hopfield retrieval for patterns, skills, and episodic traces.
 
 ## Performance & Results
 - **V1 -> V2 Stability**: V2 hidden state is ~10x more temporally stable than V1 on noisy pattern sequences.
@@ -40,6 +41,8 @@ out = hier.step(input_vec)
 - `cortical_column.py`: Phase 0-1 foundation.
 - `cortical_sheet_tensor.py`: Scalable sheet & motor logic.
 - `cortical_hierarchy.py`: Multi-area management.
+- `engram_memory.py`: Fast associative memory (Modern Hopfield retrieval).
+- `test_engram_memory.py`: Tests for engram memory layer.
 - `bench_nav.py`: Sensorimotor benchmark.
 - `bench_hierarchy.py`: Temporal stability benchmark.
 - `TODO.md`: Roadmap.
