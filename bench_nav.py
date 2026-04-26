@@ -21,7 +21,12 @@ class NavEnv:
         return np.array([self.pos, self.goal - self.pos]), reward, done
 
 def run_nav():
-    cfg = ColumnConfig(d_in=2, d_h=86, lr_base=0.001)
+    cfg = ColumnConfig(
+        d_in=2, d_h=105, d_ctx=8, d_lat=8,
+        k_neighbors=14, lr_base=0.001, tau_elig=98,
+        anti_hebb_scale=0.015519405887511693,
+        target_firing_rate=0.01
+    )
     sheet = TensorizedCorticalSheet(n_cols=50, cfg=cfg)
     env = NavEnv()
     
