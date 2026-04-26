@@ -91,6 +91,8 @@ def run_experiment(steps=1000, switch_interval=100, n_cols=50, output_csv=None):
             avg = np.mean(total_rewards[t])
             print(f"  {t:6s}: avg reward {avg:.3f} over {len(total_rewards[t])} steps")
 
+    return total_rewards
+
 
 if __name__ == "__main__":
     run_experiment(steps=500, switch_interval=100)
